@@ -1,23 +1,23 @@
 # FEATURES TO ADD:
 
 ## Filtering
-    * A - Z
-    * Z - A
-    * Highest -> Lowest Population
-    * Lowest -> Highest Population
-    * Largest -> Smallest Planet Size
-    * Smallest -> Largest Planet Size
-    * Population >= X
-    * Population <= X
+* A - Z
+* Z - A
+* Highest -> Lowest Population
+* Lowest -> Highest Population
+* Largest -> Smallest Planet Size
+* Smallest -> Largest Planet Size
+* Population >= X
+* Population <= X
 
 ## Card Info
-    * Name
-    * Rotation Period
-    * Orbital Period
-    * Diameter
-    * Climate
-    * Terrain
-    * Population
+* Name
+* Rotation Period
+* Orbital Period
+* Diameter
+* Climate
+* Terrain
+* Population
 
 
 
