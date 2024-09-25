@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import Header from "./Header/Header.jsx";
+import FormFilter from "./FormFilter/FormFilter.jsx";
 
 function App() {
   return (
     <>
       <Header />
+      <FormFilter/>
     </>
   );
 }
