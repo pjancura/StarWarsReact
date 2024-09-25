@@ -16,25 +16,25 @@ export default function FormFilter() {
         updateSortValue(e.target.value)
         // setSortValue(() => e.target.value)
         console.log(sortValue)
+        switch (sortValue) {
+            case 'zToA':
+                setSortedArray(a => a.sort().reverse())
+                console.log(sortedArray)
+                break
+            case 'highToLowPop':
+                break
+            case 'lowToHighPop':
+                break
+            case 'largeToSmall':
+                break
+            case 'smallToLarge':
+                break
+            default: 
+                setSortedArray(planetArray)
+                break   
+        }
     }
     
-    switch (sortValue) {
-        case 'zToA':
-            setSortedArray(a => a.sort().reverse())
-            console.log(sortedArray)
-            break
-        case 'highToLowPop':
-            break
-        case 'lowToHighPop':
-            break
-        case 'largeToSmall':
-            break
-        case 'smallToLarge':
-            break
-        default: 
-            setSortedArray(planetArray)
-            break   
-    }
     console.log(sortValue)
 
     return (
