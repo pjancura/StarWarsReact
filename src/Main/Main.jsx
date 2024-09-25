@@ -12,7 +12,7 @@ export default function Main() {
     const [sortedArray, setSortedArray] = useState(planetArray)
     
     function handleOnChange(e) {
-        console.log(e.target)
+        // console.log(e.target)
         setSortValue(() => e.target.value)
     }
     

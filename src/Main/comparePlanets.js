@@ -2,7 +2,6 @@ import data from "../assets/MockData/planets_page1.json" with { type: 'json' }
 
 const planetArray = data.results
 
-
 export function comparePlanets(arr, property) {
     let copyArr = [...arr]
     switch (property) {
@@ -13,10 +12,10 @@ export function comparePlanets(arr, property) {
             copyArr.sort((a, b) => b.name.localeCompare(a.name))
             break
         case 'highToLowPop':
-            copyArr.sort((a, b) => a.population - b.population)
-            break
-        case 'lowToHighPop':
             copyArr.sort((a, b) => b.population - a.population)
+            break
+            case 'lowToHighPop':
+            copyArr.sort((a, b) => a.population - b.population)
             break
         case 'largeToSmall':
             copyArr.sort((a, b) => a.diameter - b.diameter)
@@ -29,9 +28,7 @@ export function comparePlanets(arr, property) {
     }
     
     // console.log(copyArr)
-
     return copyArr
-
 }
 
 // console.log(comparePlanets(planetArray, "smallToLarge").map(planet => planet.name));
