@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { dataCleaner } from "./Main/DataCleaner";
+import { dataCleaner } from "../Main/DataCleaner";
 
 const BASE_URL = "https://swapi.dev/api/planets/";
 
