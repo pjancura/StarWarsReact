@@ -36,21 +36,21 @@ export default function Main() {
           
           let page = 1
           let next = ""
+          let newPlanet = []
 
           try {
-            while (next !== "null") {
-                const response = await fetch(`${BASE_URL}?page=${page}`, {
-                  signal: abortControllerRef.current?.signal,
-                });
+            while (next !== null) {
+              const response = await fetch(`${BASE_URL}?page=${page}`, {
+                signal: abortControllerRef.current?.signal,
+              });
                 const data = await response.json();
-                // console.log(`data: ${JSON.stringify(data.results)}`)
-                setPlanets(p => p.push(dataCleaner(data.results)));
-                console.log(`planets: ${planets}`)
-                next = data.next.toString()
-                console.log(`data.next: ${data.next}  next:: ${next}`)
-                page++
+                let dataCleaned = dataCleaner(data.results);
+                newPlanet = [...newPlanet, ...dataCleaned];
+                next = data.next
                 // setHasNextPage(data.next !== null);
+                ++page
             }
+            setPlanets(newPlanet);
           } catch (e) {
             if (e.name === "AbortError") {
               console.log("Fetch aborted");
