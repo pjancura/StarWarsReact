@@ -1,12 +1,12 @@
 import "./App.css";
 import Header from "./Header/Header.jsx";
-import FormFilter from "./Main/FormFilter.jsx";
+import Main from "./Main/Main.jsx";
 
 function App() {
   return (
     <>
       <Header />
-      <FormFilter/>
+      <Main />
     </>
   );
 }

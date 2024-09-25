@@ -1,0 +1,44 @@
+.mainContainer {
+    width: 80%;
+    margin: 2em auto;
+    display: flex;
+    gap: 2em;
+}
+
+.formFilter {
+    display:flex;
+    flex-direction: column;
+    padding-top: 2em;
+    padding-right: 1em;
+    border-right: 2px solid black;
+}
+
+.formFilter label {
+    margin-bottom: 1em;
+    font-size: 2em;
+    font-family: "Silkscreen", sans-serif;
+    border-bottom: 2px solid black;
+}
+
+.formFilter select {
+    border-radius: 5px;
+}
+
+.output {
+    max-height: 50em;
+    padding-top: 2em;
+    padding-right: 2em;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+
+.card {
+    border: 1px solid lime;
+    width: 18em;
+    margin: 2em;
+    max-height: fit-content;
+    text-wrap: wrap;
+}

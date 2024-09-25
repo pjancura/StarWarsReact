@@ -1,34 +1,12 @@
-import { useEffect, useState } from "react";
-import mockData from "../assets/MockData/planets_page1.json"
-import { comparePlanets } from "./comparePlanets"
 
-export default function FormFilter() {
-    const [sortValue, setSortValue] = useState("")
+export default function FormFilter(props) {
 
-    const [planetArray, setPlanetArray] =  useState(mockData.results)
-
-    const [sortedArray, setSortedArray] = useState(planetArray)
-
-    // componentDidUpdate(_, prevState) {
-    //     console.log(prevState)
-    // }
-
-    // console.log(sortValue)
-    
-    function handleOnChange(e) {
-        setSortValue(() => e.target.value)
-    }
-    
-    useEffect(() => {
-        setSortedArray(comparePlanets(planetArray, sortValue))
-
-    }, [sortValue, planetArray])
     
 
 
     return (
         <>
-            <form action="" onChange={handleOnChange}>
+            <form action="" className={props.className} onChange={props.onChange}>
                 <label htmlFor="sortables">Sort Planets</label>
                 <select name="sortables" id="sortables">
                     <option value="">-- Select Option --</option>
@@ -40,11 +18,7 @@ export default function FormFilter() {
                     <option value="smallToLarge">Smallest - Largest Planet</option>
                 </select>
             </form>
-            <div>
-                {sortedArray.map(planet => {
-                    return <p key={JSON.stringify(planet.name)}>{JSON.stringify(planet)}</p>
-                })}
-            </div>
+
         </>
     );
 }
