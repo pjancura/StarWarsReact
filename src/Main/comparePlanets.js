@@ -18,15 +18,14 @@ export function comparePlanets(arr, property) {
             copyArr.sort((a, b) => a.population - b.population)
             break
         case 'largeToSmall':
-            copyArr.sort((a, b) => a.diameter - b.diameter)
+            copyArr.sort((a, b) => b.diameter - a.diameter)
             break
         case 'smallToLarge':
-            copyArr.sort((a, b) => b.diameter - a.diameter)
+            copyArr.sort((a, b) => a.diameter - b.diameter)
             break
         default: 
             break   
-    }
-    
+    }   
     // console.log(copyArr)
     return copyArr
 }
@@ -44,7 +43,7 @@ export function comparePlanets(arr, property) {
 // console.log(sortedLetters)
 // console.log(`letters: ${letters}`)
 
-// const numbers = [2, 5, 100, 4]
+// const numbers = [10, 5, 100, 4]
 // numbers.sort((a, b) => {
 //     // if ( a < b ) {
 //     //     return -1

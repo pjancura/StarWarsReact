@@ -6,9 +6,7 @@ import styles from './main.module.css'
 
 export default function Main() {
     const [sortValue, setSortValue] = useState("")
-
     const [planetArray, setPlanetArray] =  useState(mockData.results)
-
     const [sortedArray, setSortedArray] = useState(planetArray)
     
     function handleOnChange(e) {
