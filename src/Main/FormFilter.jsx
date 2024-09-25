@@ -1,41 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import mockData from "../assets/MockData/planets_page1.json"
+import { comparePlanets } from "./comparePlanets"
 
 export default function FormFilter() {
-    const [sortValue, setSortValue] = useState("aToZ")
+    const [sortValue, setSortValue] = useState("")
 
-    const [planetArray, setPlanetArray] =  useState(["A", "B", "C"])
+    const [planetArray, setPlanetArray] =  useState(mockData.results)
 
     const [sortedArray, setSortedArray] = useState(planetArray)
 
-    function updateSortValue(v) {
-        setSortValue(v)
-    }
+    // componentDidUpdate(_, prevState) {
+    //     console.log(prevState)
+    // }
 
+    // console.log(sortValue)
+    
     function handleOnChange(e) {
-        console.log(e.target.value)
-        updateSortValue(e.target.value)
-        // setSortValue(() => e.target.value)
-        console.log(sortValue)
-        switch (sortValue) {
-            case 'zToA':
-                setSortedArray(a => a.sort().reverse())
-                console.log(sortedArray)
-                break
-            case 'highToLowPop':
-                break
-            case 'lowToHighPop':
-                break
-            case 'largeToSmall':
-                break
-            case 'smallToLarge':
-                break
-            default: 
-                setSortedArray(planetArray)
-                break   
-        }
+        setSortValue(() => e.target.value)
     }
     
-    console.log(sortValue)
+    useEffect(() => {
+        setSortedArray(comparePlanets(planetArray, sortValue))
+
+    }, [sortValue, planetArray])
+    
+
 
     return (
         <>
@@ -52,7 +41,9 @@ export default function FormFilter() {
                 </select>
             </form>
             <div>
-                <p className="output">{sortedArray}</p>
+                {sortedArray.map(planet => {
+                    return <p key={JSON.stringify(planet.name)}>{JSON.stringify(planet)}</p>
+                })}
             </div>
         </>
     );
