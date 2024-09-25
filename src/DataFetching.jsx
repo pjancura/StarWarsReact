@@ -1,25 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
+import { dataCleaner } from "./DataCleaner";
 
 const BASE_URL = "https://swapi.dev/api/planets/";
 
-interface Planet {
-  name: string;
-  rotation_period: number;
-  orbital_period: number;
-  diameter: number;
-  climate: string;
-  terrain: string;
-  population: number;
-}
-
 export default function DataFetching() {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
-  const [planets, setPlanets] = useState<Planet[]>([]);
+  const [error, setError] = useState(null);
+  const [planets, setPlanets] = useState([]);
   const [page, setPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(true);
 
-  const abortControllerRef = useRef<AbortController | null>(null);
+  const abortControllerRef = useRef(null);
 
   useEffect(() => {
     const fetchPlanets = async () => {
@@ -33,14 +24,14 @@ export default function DataFetching() {
           signal: abortControllerRef.current?.signal,
         });
         const data = await response.json();
-        setPlanets(data.results);
+        setPlanets(() => dataCleaner(data.results));
         setHasNextPage(data.next !== null);
       } catch (e) {
         if (e.name === "AbortError") {
           console.log("Fetch aborted");
           return;
         }
-        setError(e as Error);
+        setError(e);
         alert(e);
       } finally {
         setIsLoading(false);
