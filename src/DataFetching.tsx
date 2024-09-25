@@ -50,6 +50,18 @@ export default function DataFetching() {
     fetchPlanets();
   }, [page]);
 
+  const handleNextPage = () => {
+    if (hasNextPage) {
+      setPage(page + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -61,7 +73,8 @@ export default function DataFetching() {
   return (
     <div>
       <h1>Planets Data</h1>
-      <button onClick={() => setPage(page + 1)}>Increase Page ({page}) </button>
+      <button onClick={handleNextPage}>Increase Page ({page}) </button>
+      <button onClick={handlePreviousPage}>Decrease Page ({page}) </button>
       <ul>
         {planets.map((planet) => {
           return (
