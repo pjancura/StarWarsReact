@@ -1,13 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import mockData from "../assets/MockData/planets_page1.json"
 import { comparePlanets } from "./comparePlanets"
 import FormFilter from "./FormFilter";
 import styles from './main.module.css'
+import { dataCleaner } from "./DataCleaner";
+
+const BASE_URL = "https://swapi.dev/api/planets/";
 
 export default function Main() {
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [planets, setPlanets] = useState([]);
     const [sortValue, setSortValue] = useState("")
-    const [planetArray, setPlanetArray] =  useState(mockData.results)
-    const [sortedArray, setSortedArray] = useState(planetArray)
+    const [sortedArray, setSortedArray] = useState(planets)
+    // const [page, setPage] = useState(1);
+    const [hasNextPage, setHasNextPage] = useState(true);
+  
+    const abortControllerRef = useRef(null);
     
     function handleOnChange(e) {
         // console.log(e.target)
@@ -15,9 +24,71 @@ export default function Main() {
     }
     
     useEffect(() => {
-        setSortedArray(comparePlanets(planetArray, sortValue))
+        setSortedArray(comparePlanets(planets, sortValue))
+    }, [sortValue, planets])
 
-    }, [sortValue, planetArray])
+    useEffect(() => {
+        const fetchPlanets = async () => {
+          abortControllerRef.current?.abort();
+          abortControllerRef.current = new AbortController();
+    
+          setIsLoading(true);
+          
+          let page = 1
+          let next = ""
+
+          try {
+            while (next !== "null") {
+                const response = await fetch(`${BASE_URL}?page=${page}`, {
+                  signal: abortControllerRef.current?.signal,
+                });
+                const data = await response.json();
+                // console.log(`data: ${JSON.stringify(data.results)}`)
+                setPlanets(p => p.push(dataCleaner(data.results)));
+                console.log(`planets: ${planets}`)
+                next = data.next.toString()
+                console.log(`data.next: ${data.next}  next:: ${next}`)
+                page++
+                // setHasNextPage(data.next !== null);
+            }
+          } catch (e) {
+            if (e.name === "AbortError") {
+              console.log("Fetch aborted");
+              return;
+            }
+            setError(e);
+            alert(e);
+          } finally {
+            setIsLoading(false);
+          }
+        };
+    
+        fetchPlanets();
+      }, []);
+    
+    //   const handleNextPage = () => {
+    //     if (hasNextPage) {
+    //       setPage(page + 1);
+    //     }
+    //   };
+    
+    //   const handlePreviousPage = () => {
+    //     if (page > 1) {
+    //       setPage(page - 1);
+    //     }
+    //   };
+    
+      if (isLoading) {
+        return <div>Loading...</div>;
+      }
+    
+      if (error) {
+        return <div>Something went wrong please refresh the page</div>;
+      }
+
+
+
+
 
     return (
         <main className={styles.mainContainer}>
@@ -25,10 +96,23 @@ export default function Main() {
 
             {/* THIS OUTPUT DIV WILL BECOME THE <CARDDISPLAY/>  */}
             <div className={styles.output}>
-                {sortedArray.map(planet => {
+            {sortedArray.map((planet) => {
+                return (
+                    <p key={planet.name} className={styles.card}>
+                    {planet.name} - Rotation Period: {planet.rotation_period}, Orbital
+                    Period: {planet.orbital_period}, Diameter: {planet.diameter},
+                    Climate: {planet.climate}, Terrain: {planet.terrain}, Population:
+                    {planet.population},
+                    </p>
+          );
+        })}
+                {/* {sortedArray.map(planet => {
                     return <p className={styles.card} key={JSON.stringify(planet.name)}>{JSON.stringify(planet).replaceAll(",", ", ")}</p>
-                })}
+                })} */}
             </div>
+{/* 
+            <button onClick={handleNextPage}>Increase Page ({page}) </button>
+            <button onClick={handlePreviousPage}>Decrease Page ({page}) </button> */}
     </main>
     );
 }
