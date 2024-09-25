@@ -1,3 +1,9 @@
+import "./Header.css";
+
 export default function Header() {
-  return <h1>Welcome to Planet React</h1>;
+  return( 
+  <div className = 'rectangle'>
+      <h1>Welcome to Planet React</h1>
+    </div>
+  );
 }
