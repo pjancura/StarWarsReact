@@ -45,61 +45,43 @@ export function comparePlanets(arr, properties) {
 
     if (properties.get("temperate") === "on") {
         checkFilters.push(copyArr.filter(item => {
-            // console.log(item)
-            // console.log(stringToArray(item.climate).includes("temperate"))
             return item.climate.includes("temperate")
         }))
     }
 
     if (properties.get("arid") === "on") {
         checkFilters.push(copyArr.filter(item => {
-            // console.log(item)
-            // console.log(stringToArray(item.climate).includes("temperate"))
-            return item.climate.includes("temperate")
+            return item.climate.includes("arid")
         }))
     }
 
     if (properties.get("frozen") === "on") {
         checkFilters.push(copyArr.filter(item => {
-            // console.log(item)
-            // console.log(stringToArray(item.climate).includes("temperate"))
-            return item.climate.includes("temperate")
+            return item.climate.includes("frozen")
         }))
     }
 
+    if (properties.get("desert") === "on") {
+        checkFilters.push(copyArr.filter(item => {
+            return item.terrain.includes("desert")
+        }))
+    }
 
+    if (properties.get("mountainRanges") === "on") {
+        checkFilters.push(copyArr.filter(item => {
+            return item.terrain.includes("mountain ranges")
+        }))
+    }
 
     if (properties.get("gasGiant") === "on") {
-            checkFilters.push(copyArr.filter(item => {
-                return item.terrain.includes("gas giant")
-            }
-        ))
+        checkFilters.push(copyArr.filter(item => {
+            return item.terrain.includes("gas giant")
+        }))
     }
+
     
     console.log(checkFilters)
     return checkFilters.length > 0 ? checkFilters : copyArr
 }
 
-// function stringToArray(s) {
-//     s.replaceAll(" ", "")
-//     let arr = s.split(",")
-//     console.log(arr)
-//     return arr
-// }
-
-
-
 console.log(comparePlanets(mD, formMap).length)
-
-// console.log(stringToArray(mD[1].terrain).includes("temperate"))
-
-
-
-
-
-// let formKeys = formMap.keys()
-// console.log(formMap.get("sortables"))
-// console.log(formMap.forEach((key) => {
-//     console.log(key)
-//     console.log(formMap.get(key))
-// }))

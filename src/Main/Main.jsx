@@ -31,18 +31,24 @@ export default function Main() {
   
     const abortControllerRef = useRef(null);
 
+    
     function handleOnChange(e) {
-        let { type, value, name} = e.target
+        let { type, value, name, checked} = e.target
         if (type === "text") {
             console.log(value)
             return
         }
         if (type === "checkbox") {
-            let newName = handleCheckboxFilters(name)
-            console.log(newName)
+            setSortValues(v => {
+                return new Map(v.set(name, checked))
+            })
+            console.log(sortValues)            
             return
         }
-        setSortValues(() => value)
+
+
+        setSortValues(v => new Map(v.forEach))
+        console.log(sortValues)
     }
     
     useEffect(() => {

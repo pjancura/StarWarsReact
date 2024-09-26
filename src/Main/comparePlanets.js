@@ -2,9 +2,10 @@ import data from "../assets/MockData/planets_page1.json" with { type: 'json' }
 
 const planetArray = data.results
 
-export function comparePlanets(arr, property) {
+export function comparePlanets(arr, properties) {
     let copyArr = [...arr]
-    switch (property) {
+    // checks for "sortables" value
+    switch (properties.get("sortables")) {
         case 'aToZ':
             copyArr.sort((a, b) => a.name.localeCompare(b.name))
             break 
@@ -25,10 +26,78 @@ export function comparePlanets(arr, property) {
             break
         default: 
             break   
-    }   
-    // console.log(copyArr)
-    return copyArr
+    }
+    
+    let checkFilters = []
+
+    if (properties.get("temperate") === "on") {
+        checkFilters.push(copyArr.filter(item => {
+            return item.climate.includes("temperate")
+        }))
+    }
+
+    if (properties.get("arid") === "on") {
+        checkFilters.push(copyArr.filter(item => {
+            return item.climate.includes("arid")
+        }))
+    }
+
+    if (properties.get("frozen") === "on") {
+        checkFilters.push(copyArr.filter(item => {
+            return item.climate.includes("frozen")
+        }))
+    }
+
+    if (properties.get("desert") === "on") {
+        checkFilters.push(copyArr.filter(item => {
+            return item.terrain.includes("desert")
+        }))
+    }
+
+    if (properties.get("mountainRanges") === "on") {
+        checkFilters.push(copyArr.filter(item => {
+            return item.terrain.includes("mountain ranges")
+        }))
+    }
+
+    if (properties.get("gasGiant") === "on") {
+        checkFilters.push(copyArr.filter(item => {
+            return item.terrain.includes("gas giant")
+        }))
+    }
+
+    
+    // console.log(checkFilters)
+    return checkFilters.length > 0 ? checkFilters : copyArr
 }
+
+// export function comparePlanets(arr, property) {
+//     let copyArr = [...arr]
+//     switch (property) {
+//         case 'aToZ':
+//             copyArr.sort((a, b) => a.name.localeCompare(b.name))
+//             break 
+//         case 'zToA':
+//             copyArr.sort((a, b) => b.name.localeCompare(a.name))
+//             break
+//         case 'highToLowPop':
+//             copyArr.sort((a, b) => b.population - a.population)
+//             break
+//             case 'lowToHighPop':
+//             copyArr.sort((a, b) => a.population - b.population)
+//             break
+//         case 'largeToSmall':
+//             copyArr.sort((a, b) => b.diameter - a.diameter)
+//             break
+//         case 'smallToLarge':
+//             copyArr.sort((a, b) => a.diameter - b.diameter)
+//             break
+//         default: 
+//             break   
+//     }   
+//     // console.log(copyArr)
+//     return copyArr
+// }
 
 // console.log(comparePlanets(planetArray, "smallToLarge").map(planet => planet.name));
 
