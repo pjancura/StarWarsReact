@@ -5,6 +5,7 @@ import FormFilter from "./FormFilter";
 import CardDisplay from './CardDisplay'
 import styles from './main.module.css'
 import { dataCleaner } from "./DataCleaner";
+import handleCheckboxFilters from "./HandleCheckboxFilters";
 
 const BASE_URL = "https://swapi.dev/api/planets/";
 
@@ -12,21 +13,41 @@ export default function Main() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [planets, setPlanets] = useState([]);
-    const [sortValue, setSortValue] = useState("")
+    const [sortValues, setSortValues] = useState(
+        new Map([
+            {"sortables": ""},
+            {"temperate": ""},
+            {"arid": ""},
+            {"frozen": ""},
+            {"mountainRanges": ""},
+            {"desert": ""},
+            {"gasGiant": ""},
+            {"minMaxPopulation": [0, 0]}
+        ])
+    )
     const [sortedArray, setSortedArray] = useState(planets)
     // const [page, setPage] = useState(1);
     const [hasNextPage, setHasNextPage] = useState(true);
   
     const abortControllerRef = useRef(null);
-    
+
     function handleOnChange(e) {
-        let { type, value } = e.target
-        setSortValue(() => value)
+        let { type, value, name} = e.target
+        if (type === "text") {
+            console.log(value)
+            return
+        }
+        if (type === "checkbox") {
+            let newName = handleCheckboxFilters(name)
+            console.log(newName)
+            return
+        }
+        setSortValues(() => value)
     }
     
     useEffect(() => {
-        setSortedArray(comparePlanets(planets, sortValue))
-    }, [sortValue, planets])
+        setSortedArray(comparePlanets(planets, sortValues))
+    }, [sortValues, planets])
 
     useEffect(() => {
         const fetchPlanets = async () => {
@@ -67,18 +88,6 @@ export default function Main() {
         fetchPlanets();
       }, []);
     
-    //   const handleNextPage = () => {
-    //     if (hasNextPage) {
-    //       setPage(page + 1);
-    //     }
-    //   };
-    
-    //   const handlePreviousPage = () => {
-    //     if (page > 1) {
-    //       setPage(page - 1);
-    //     }
-    //   };
-    
       if (isLoading) {
         return <div>Loading...</div>;
       }
@@ -94,28 +103,7 @@ export default function Main() {
     return (
         <main className={styles.mainContainer}>
             <FormFilter className={styles.formFilter} styles={styles} onChange={handleOnChange} />
-
-            {/* THIS OUTPUT DIV WILL BECOME THE <CARDDISPLAY/>  */}
-
             <CardDisplay className={styles.output} cardInfo={sortedArray}/>
-            {/* <div className={styles.output}>
-            {sortedArray.map((planet) => {
-                return (
-                    <p key={planet.name} className={styles.card}>
-                    {planet.name} - Rotation Period: {planet.rotation_period}, Orbital
-                    Period: {planet.orbital_period}, Diameter: {planet.diameter},
-                    Climate: {planet.climate}, Terrain: {planet.terrain}, Population:
-                    {planet.population},
-                    </p>
-          );
-        })}
-                {/* {sortedArray.map(planet => {
-                    return <p className={styles.card} key={JSON.stringify(planet.name)}>{JSON.stringify(planet).replaceAll(",", ", ")}</p>
-                })} */}
-           {/* </div> */}
-{/* 
-            <button onClick={handleNextPage}>Increase Page ({page}) </button>
-            <button onClick={handlePreviousPage}>Decrease Page ({page}) </button> */}
     </main>
     );
 }

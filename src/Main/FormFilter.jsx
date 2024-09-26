@@ -1,12 +1,32 @@
 export default function FormFilter(props) {
 
-    
+    function handlePopulationRange() {
+        let min = document.getElementById("minPopulation").value
+        let max = document.getElementById("maxPopulation").value
+        let parsedMin = 0
+        let parsedMax = -1
+        console.log(typeof(min), min)
+        min === "" ? parsedMin = 0 : parsedMin = parseInt(min) 
+        max === "" ? parsedMax = -1 : parsedMax = parseInt(max)
+        console.log(min, max)
+        if (Number.isNaN(parsedMin)){
+            console.log(`Error: ${min} is not a number.`)
+            return
+        }
+        if (Number.isNaN(parsedMax)) {
+            console.log("max NaN")
+            console.log(`Error: ${max} is not a number.`)
+            return
+        }
+        console.log(parsedMin, parsedMax)
+        return [parsedMin, parsedMax]
+    }
 
 
     return (
         <div className={props.className}>
             <h2 className="">Filter Planets</h2>
-            <form action="" onChange={props.onChange}>
+            <form action="" onChange={props.onChange} id="planet-form">
                 <h4 className={props.styles.selectLabel}>Sort by
                 </h4>
                 <select name="sortables" id="sortables">
@@ -50,12 +70,14 @@ export default function FormFilter(props) {
                         </label>
                 </div>
 
-                <div className="minMaxPopulation">
+                <div className={props.styles.minMaxPopulation}>
                     <h4>Population Range</h4>
-                    <input type="text" name="minPopulation" id="minPopulation" placeholder="Min." />
+                    <input type="text" name="minPopulation" id="minPopulation" placeholder="Min."/>
                     <p> to </p>
-                    <input type="text" name="maxPopulation" id="maxPopulation" placeholder="Max." />
+                    <input type="text" name="maxPopulation" id="maxPopulation" placeholder="Max."/>
+                    <button type="button" onClick={handlePopulationRange} >Change Range</button>
                 </div>
+                <button type="reset">Clear Form</button>
             </form>
 
         </div>
