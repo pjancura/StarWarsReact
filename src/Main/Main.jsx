@@ -3,6 +3,7 @@ import FormFilter from "./FormFilter";
 import styles from './main.module.css'
 import { dataCleaner } from "../helperfunctions/DataCleaner";
 import { climates, comparePlanets, filterClimate} from "../helperfunctions/filters";
+import CardDisplay from "./CardDisplay";
 
 const BASE_URL = "https://swapi.dev/api/planets/";
 
@@ -101,26 +102,7 @@ export default function Main() {
     return (
         <main className={styles.mainContainer}>
             <FormFilter className={styles.formFilter} sortable={handleOnChange} climates={climates(planets)} sortbyClimate={handleClimateFilter}/>
-
-            {/* THIS OUTPUT DIV WILL BECOME THE <CARDDISPLAY/>  */}
-            <div className={styles.output}>
-            {sortedArray.map((planet) => {
-                return (
-                    <p key={planet.name} className={styles.card}>
-                    {planet.name} - Rotation Period: {planet.rotation_period}, Orbital
-                    Period: {planet.orbital_period}, Diameter: {planet.diameter},
-                    Climate: {planet.climate}, Terrain: {planet.terrain}, Population:
-                    {planet.population},
-                    </p>
-          );
-        })}
-                {/* {sortedArray.map(planet => {
-                    return <p className={styles.card} key={JSON.stringify(planet.name)}>{JSON.stringify(planet).replaceAll(",", ", ")}</p>
-                })} */}
-            </div>
-{/* 
-            <button onClick={handleNextPage}>Increase Page ({page}) </button>
-            <button onClick={handlePreviousPage}>Decrease Page ({page}) </button> */}
-    </main>
+            <CardDisplay className={styles.output} cardInfo={sortedArray}/>
+        </main>
     );
 }
