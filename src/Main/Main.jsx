@@ -28,7 +28,7 @@ export default function Main() {
     }
     
     useEffect(() => {
-        setSortedArray(comparePlanets(planets, sortValue))
+        setSortedArray(comparePlanets(sortedArray, sortValue))
     }, [sortValue, planets])
 
     useEffect(() => {
