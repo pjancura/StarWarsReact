@@ -8,21 +8,46 @@
 .formFilter {
     display:flex;
     flex-direction: column;
-    padding-top: 2em;
+    padding-top: 0em;
     padding-right: 1em;
     border-right: 2px solid black;
 }
 
-.formFilter label {
+.formFilter h2 {
     margin-bottom: 1em;
     font-size: 2em;
     font-family: "Silkscreen", sans-serif;
     border-bottom: 2px solid black;
 }
 
+.formFilter form {
+    display: flex;
+    flex-direction: column;
+}
+
+.selectLabel {
+    font-size: 1.25em;
+    margin: 0 0 0.5em 0;
+}
+
 .formFilter select {
     border-radius: 5px;
 }
+
+.checkboxDiv {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+}
+.checkboxDiv h4 {
+    font-size: 1.25em;
+    margin: 0 0 0.5em 0;
+}
+
+.checkboxDiv input {
+    margin-right: 1em;
+}
+
 
 .output {
     max-height: 50em;

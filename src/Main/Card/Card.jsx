@@ -23,7 +23,7 @@ export default function Card(props) {
             return
         }
         let fixedKey = fixKey(key)
-        console.log(fixedKey, value)
+        // console.log(fixedKey, value)
         return <li className={style.listItem}key={crypto.randomUUID()}><span className={style.bold}>{fixedKey}:</span> {value}</li>
     }
 

@@ -20,8 +20,8 @@ export default function Main() {
     const abortControllerRef = useRef(null);
     
     function handleOnChange(e) {
-        // console.log(e.target)
-        setSortValue(() => e.target.value)
+        let { type, value } = e.target
+        setSortValue(() => value)
     }
     
     useEffect(() => {
@@ -93,7 +93,7 @@ export default function Main() {
 
     return (
         <main className={styles.mainContainer}>
-            <FormFilter className={styles.formFilter} onChange={handleOnChange} />
+            <FormFilter className={styles.formFilter} styles={styles} onChange={handleOnChange} />
 
             {/* THIS OUTPUT DIV WILL BECOME THE <CARDDISPLAY/>  */}
 
