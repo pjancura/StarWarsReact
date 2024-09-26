@@ -9,7 +9,7 @@ let formMap = new Map([
     ["frozen", "4"],
     ["mountainRanges", "5"],
     ["desert", "6"],
-    ["gasGiant", "7"],
+    ["gasGiant", "on"],
     ["minMaxPopulation", [0, -1]]
 ])
 
@@ -44,19 +44,36 @@ export function comparePlanets(arr, properties) {
     let checkFilters = []
 
     if (properties.get("temperate") === "on") {
-        checkFilters = copyArr.filter(item => {
+        checkFilters.push(copyArr.filter(item => {
             // console.log(item)
             // console.log(stringToArray(item.climate).includes("temperate"))
             return item.climate.includes("temperate")
-        })
+        }))
     }
 
-    if (properties.get("") === "on") {
-        checkFilters = copyArr.filter(item => {
+    if (properties.get("arid") === "on") {
+        checkFilters.push(copyArr.filter(item => {
             // console.log(item)
             // console.log(stringToArray(item.climate).includes("temperate"))
-            return stringToArray(item.climate).includes("temperate")
-        })
+            return item.climate.includes("temperate")
+        }))
+    }
+
+    if (properties.get("frozen") === "on") {
+        checkFilters.push(copyArr.filter(item => {
+            // console.log(item)
+            // console.log(stringToArray(item.climate).includes("temperate"))
+            return item.climate.includes("temperate")
+        }))
+    }
+
+
+
+    if (properties.get("gasGiant") === "on") {
+            checkFilters.push(copyArr.filter(item => {
+                return item.terrain.includes("gas giant")
+            }
+        ))
     }
     
     console.log(checkFilters)

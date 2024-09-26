@@ -15,14 +15,14 @@ export default function Main() {
     const [planets, setPlanets] = useState([]);
     const [sortValues, setSortValues] = useState(
         new Map([
-            {"sortables": ""},
-            {"temperate": ""},
-            {"arid": ""},
-            {"frozen": ""},
-            {"mountainRanges": ""},
-            {"desert": ""},
-            {"gasGiant": ""},
-            {"minMaxPopulation": [0, 0]}
+            ["sortables", ""],
+            ["temperate", ""],
+            ["arid", ""],
+            ["frozen", ""],
+            ["mountainRanges", ""],
+            ["desert", ""],
+            ["gasGiant", ""],
+            ["minMaxPopulation", [0, 0]]
         ])
     )
     const [sortedArray, setSortedArray] = useState(planets)
