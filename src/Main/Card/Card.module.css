@@ -1,0 +1,20 @@
+.bold {
+    font-weight: bold;
+}
+
+.card {
+    border: 1px solid lime;
+    width: 20em;
+    height: max-content;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 1em;
+    border-radius: 10px;
+}
+
+.listItem {
+    list-style-type: none;
+    margin-bottom: 0.5em;
+}
+

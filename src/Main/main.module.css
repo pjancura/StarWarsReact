@@ -31,14 +31,15 @@
     overflow-y: scroll;
     display: flex;
     flex-direction: row;
+    gap: 2em;
     flex-wrap: wrap;
     justify-content: start;
 }
 
-.card {
+/* .card {
     border: 1px solid lime;
     width: 18em;
     margin: 2em;
     max-height: fit-content;
     text-wrap: wrap;
-}
+} */

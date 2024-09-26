@@ -17,6 +17,11 @@ export default function FormFilter(props) {
                     <option value="largeToSmall">Largest - Smallest Planet</option>
                     <option value="smallToLarge">Smallest - Largest Planet</option>
                 </select>
+                <fieldset>
+                    <legend>Climate</legend>
+                        <input type="checkbox" name="temperate" id="temperate" />
+                    <label htmlFor="temperate">Temperate</label>
+                </fieldset>
             </form>
 
         </>

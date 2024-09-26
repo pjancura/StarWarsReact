@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import mockData from "../assets/MockData/planets_page1.json"
 import { comparePlanets } from "./comparePlanets"
 import FormFilter from "./FormFilter";
+import CardDisplay from './CardDisplay'
 import styles from './main.module.css'
 import { dataCleaner } from "./DataCleaner";
 
@@ -95,7 +96,9 @@ export default function Main() {
             <FormFilter className={styles.formFilter} onChange={handleOnChange} />
 
             {/* THIS OUTPUT DIV WILL BECOME THE <CARDDISPLAY/>  */}
-            <div className={styles.output}>
+
+            <CardDisplay className={styles.output} cardInfo={sortedArray}/>
+            {/* <div className={styles.output}>
             {sortedArray.map((planet) => {
                 return (
                     <p key={planet.name} className={styles.card}>
@@ -109,7 +112,7 @@ export default function Main() {
                 {/* {sortedArray.map(planet => {
                     return <p className={styles.card} key={JSON.stringify(planet.name)}>{JSON.stringify(planet).replaceAll(",", ", ")}</p>
                 })} */}
-            </div>
+           {/* </div> */}
 {/* 
             <button onClick={handleNextPage}>Increase Page ({page}) </button>
             <button onClick={handlePreviousPage}>Decrease Page ({page}) </button> */}
