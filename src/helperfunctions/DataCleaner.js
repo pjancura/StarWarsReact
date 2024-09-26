@@ -13,7 +13,6 @@ export function dataCleaner (arr) {
     cleanArray.push(objecte);
     
 })
-console.log(cleanArray);
 return cleanArray
 }
 

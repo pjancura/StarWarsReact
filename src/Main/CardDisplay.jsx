@@ -1,7 +1,7 @@
-function CardDetail(prop) {
+function CardDisplay(prop) {
     return(
         <></>
     );
 }
 
-export default CardDetail
+export default CardDisplay

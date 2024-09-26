@@ -1,9 +1,8 @@
 import { useEffect, useState, useRef } from "react";
-import mockData from "../assets/MockData/planets_page1.json"
-import { comparePlanets } from "./comparePlanets"
 import FormFilter from "./FormFilter";
 import styles from './main.module.css'
-import { dataCleaner } from "./DataCleaner";
+import { dataCleaner } from "../helperfunctions/DataCleaner";
+import { climates, comparePlanets, filterClimate} from "../helperfunctions/filters";
 
 const BASE_URL = "https://swapi.dev/api/planets/";
 
@@ -15,6 +14,7 @@ export default function Main() {
     const [sortedArray, setSortedArray] = useState(planets)
     // const [page, setPage] = useState(1);
     const [hasNextPage, setHasNextPage] = useState(true);
+    const [sortByClimate, setSortByClimate] = useState("");
   
     const abortControllerRef = useRef(null);
     
@@ -22,10 +22,18 @@ export default function Main() {
         // console.log(e.target)
         setSortValue(() => e.target.value)
     }
+
+    function handleClimateFilter(e) {
+        setSortByClimate(e.target.value);
+    }
     
     useEffect(() => {
         setSortedArray(comparePlanets(planets, sortValue))
     }, [sortValue, planets])
+
+    useEffect(() => {
+      setSortedArray(filterClimate(planets, sortByClimate))
+  }, [sortByClimate, planets])
 
     useEffect(() => {
         const fetchPlanets = async () => {
@@ -92,7 +100,7 @@ export default function Main() {
 
     return (
         <main className={styles.mainContainer}>
-            <FormFilter className={styles.formFilter} onChange={handleOnChange} />
+            <FormFilter className={styles.formFilter} sortable={handleOnChange} climates={climates(planets)} sortbyClimate={handleClimateFilter}/>
 
             {/* THIS OUTPUT DIV WILL BECOME THE <CARDDISPLAY/>  */}
             <div className={styles.output}>
