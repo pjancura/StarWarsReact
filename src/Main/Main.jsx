@@ -40,15 +40,16 @@ export default function Main() {
         }
         if (type === "checkbox") {
             setSortValues(v => {
-                return new Map(v.set(name, checked))
-            })
-            console.log(sortValues)            
-            return
+                let newMap = new Map(v)
+                return newMap.set(name, checked)
+            })           
         }
-
-
-        setSortValues(v => new Map(v.forEach))
-        console.log(sortValues)
+        if (type === "select-one") {
+            setSortValues(v => {
+                let newMap = new Map(v)
+                return newMap.set(name, value)
+            })
+        }
     }
     
     useEffect(() => {

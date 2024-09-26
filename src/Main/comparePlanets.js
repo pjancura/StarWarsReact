@@ -30,37 +30,37 @@ export function comparePlanets(arr, properties) {
     
     let checkFilters = []
 
-    if (properties.get("temperate") === "on") {
+    if (properties.get("temperate") === true) {
         checkFilters.push(copyArr.filter(item => {
             return item.climate.includes("temperate")
         }))
     }
 
-    if (properties.get("arid") === "on") {
+    if (properties.get("arid") === true) {
         checkFilters.push(copyArr.filter(item => {
             return item.climate.includes("arid")
         }))
     }
 
-    if (properties.get("frozen") === "on") {
+    if (properties.get("frozen") === true) {
         checkFilters.push(copyArr.filter(item => {
             return item.climate.includes("frozen")
         }))
     }
 
-    if (properties.get("desert") === "on") {
+    if (properties.get("desert") === true) {
         checkFilters.push(copyArr.filter(item => {
             return item.terrain.includes("desert")
         }))
     }
 
-    if (properties.get("mountainRanges") === "on") {
+    if (properties.get("mountainRanges") === true) {
         checkFilters.push(copyArr.filter(item => {
             return item.terrain.includes("mountain ranges")
         }))
     }
 
-    if (properties.get("gasGiant") === "on") {
+    if (properties.get("gasGiant") === true) {
         checkFilters.push(copyArr.filter(item => {
             return item.terrain.includes("gas giant")
         }))
