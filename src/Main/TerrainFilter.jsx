@@ -1,3 +1,6 @@
+import React, { useState } from 'react';
+
+
 export default function FormFilter(props) {
 
     function handlePopulationRange() {
@@ -24,7 +27,7 @@ export default function FormFilter(props) {
 
 
     return (
-        <div className={props.className}e>
+        <div className={props.className}>
             <h2 className="">Filter Planets</h2>
             <form action="" onChange={props.onChange} id="planet-form">
                 <h4 className={props.styles.selectLabel}>Sort by
@@ -38,6 +41,46 @@ export default function FormFilter(props) {
                     <option value="largeToSmall">Largest - Smallest Planet</option>
                     <option value="smallToLarge">Smallest - Largest Planet</option>
                 </select>
+
+
+
+                const TerrainFilter = (props) => {
+    // Step 1: Create a state to keep track of selected checkboxes
+    const [selectedTerrains, setSelectedTerrains] = useState({
+        mountainRanges: false,
+        desert: false,
+        gasGiant: false,
+    });
+
+    // Step 2: Create an onChange event handler
+    const handleCheckboxChange = (event) => {
+        const { name, checked } = event.target;
+        // Update the state based on the checkbox change
+        setSelectedTerrains((prevState) => ({
+            ...prevState,
+            [name]: checked,
+        }));
+    };
+
+    // Step 3: Filter results based on the selected checkboxes
+    const filterResults = () => {
+        const results = props.data; // Assuming props.data is the list of results you want to filter
+        const { mountainRanges, desert, gasGiant } = selectedTerrains;
+
+        // Filter the results based on the selected checkboxes
+        const filteredResults = results.filter((item) => {
+            if (mountainRanges && item.type === 'Mountain Ranges') return true;
+            if (desert && item.type === 'Desert') return true;
+            if (gasGiant && item.type === 'Gas Giant') return true;
+            return false;
+        });
+
+        return filteredResults;
+    };
+
+    // Get filtered results
+    const filteredResults = filterResults();
+   
                 <div className={props.styles.checkboxDiv}>
                     <h4>Climate</h4>
                         <label htmlFor="temperate">
@@ -57,15 +100,21 @@ export default function FormFilter(props) {
                 <div className={props.styles.checkboxDiv}>
                     <h4>Terrain</h4>
                         <label htmlFor="mountainRanges">
-                            <input type="checkbox" name="mountainRanges" id="mountainRanges" />                    
+                            <input type="checkbox" name="mountainRanges" id="mountainRanges" 
+                            checked={selectedTerrains.mountainRanges}
+                            onChange={handleCheckboxChange}/>                    
                             Mountain Ranges
                         </label>                    
                         <label htmlFor="desert">
-                            <input type="checkbox" name="desert" id="desert" />
+                            <input type="checkbox" name="desert" id="desert" 
+                            checked={selectedTerrains.desert}
+                            onChange={handleCheckboxChange}/>
                             Desert
                         </label>
                         <label htmlFor="gasGiant">
-                            <input type="checkbox" name="gasGiant" id="gasGiant" />
+                            <input type="checkbox" name="gasGiant" id="gasGiant" 
+                            checked={selectedTerrains.gasGiant}
+                            onChange={handleCheckboxChange}/>
                             Gas Giant
                         </label>
                 </div>
@@ -81,5 +130,6 @@ export default function FormFilter(props) {
             </form>
 
         </div>
+    
     );
 }
