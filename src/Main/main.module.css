@@ -31,13 +31,13 @@
     padding-right: 2em;
     overflow-y: scroll;
     display: flex;
+    gap: 2em;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: start;
 }
 
 .card {
-    border: 1px solid lime;
     width: 18em;
     margin: 2em;
     max-height: fit-content;

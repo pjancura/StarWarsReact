@@ -1,6 +1,13 @@
 import style from "./card.module.css"
+import assets from "../assets/1.png"
 
 export default function Card(props) {
+
+    function pickImage() {
+        let n = Math.ceil(Math.random() * 10)
+        let s = `/src/assets/${n}.png`
+        return s
+    }
 
     function fixKey(s) {
         let newTitle = ""
@@ -28,9 +35,8 @@ export default function Card(props) {
     }
 
     return(
-        <div className={style.card}>             
-        {/* style={{backgroundImage: props.image}} */}
-            <h2 className='card-title'>{props.info.name}</h2>
+        <div className={style.card} style={{backgroundImage: `url(${pickImage()})`}}>             
+            <h2 className={style.title}>{props.info.name}</h2>
             <ul className='card-property'>
                 {Object.entries(props.info).map(property => {
                     return createListItem(property)

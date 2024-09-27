@@ -3,7 +3,6 @@
 }
 
 .card {
-    border: 1px solid lime;
     width: 20em;
     height: max-content;
     background-position: center;
@@ -13,7 +12,12 @@
     border-radius: 10px;
 }
 
+.title {
+    color: white;
+}
+
 .listItem {
     list-style-type: none;
     margin-bottom: 0.5em;
+    color: white;
 }
