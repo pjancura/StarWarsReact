@@ -22,21 +22,23 @@
 
 .formFilter select {
     border-radius: 5px;
+    padding: 0;
 }
 
 .output {
     max-height: 50em;
+    min-height: 50em;
     padding-top: 2em;
     padding-right: 2em;
     overflow-y: scroll;
     display: flex;
+    gap: 2em;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: start;
 }
 
 .card {
-    border: 1px solid lime;
     width: 18em;
     margin: 2em;
     max-height: fit-content;
