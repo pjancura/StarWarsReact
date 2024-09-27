@@ -27,6 +27,7 @@
 
 .output {
     max-height: 50em;
+    min-height: 50em;
     padding-top: 2em;
     padding-right: 2em;
     overflow-y: scroll;
