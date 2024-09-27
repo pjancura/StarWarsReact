@@ -66,7 +66,7 @@ export default function Main() {
               return;
             }
             setError(e);
-            alert(e);
+            // alert(e);
           } finally {
             setIsLoading(false);
           }
