@@ -5,7 +5,7 @@ export default function CardDisplay(props) {
         <div className={props.className}>
             {props.cardInfo.map(card => {
                 return (
-                    <Card key={card.name} info={card}/>
+                    <Card key={crypto.randomUUID()} info={card}/>
                 )
             })}
             

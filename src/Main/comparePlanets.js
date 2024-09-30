@@ -29,17 +29,41 @@ export function comparePlanets(arr, properties) {
     }
     
     let checkFilters = []
+    let namesInArray = []
+
+    if(properties.entries())
 
     if (properties.get("temperate") === true) {
-        checkFilters.push(copyArr.filter(item => {
-            return item.climate.includes("temperate")
-        }))
+        checkFilters = copyArr.filter(item => {
+            let isTemperate = item.climate.includes("temperate")
+            if (isTemperate) {
+                namesInArray.push(item.name)
+            }
+            return isTemperate
+        })
+
     }
 
     if (properties.get("arid") === true) {
-        checkFilters.push(copyArr.filter(item => {
-            return item.climate.includes("arid")
-        }))
+        if (checkFilters.length > 0) {
+            copyArr.map(item => {
+                let isArid = item.climate.includes("arid")
+                if (isArid && !namesInArray.includes(item.name)) {
+                    checkFilters.push(item)
+                    namesInArray.push(item.name)
+                }
+            })
+        }
+    else {
+            checkFilters = copyArr.filter(item => {
+                let isArid = item.climate.includes("arid")
+                if (isArid) {
+                    namesInArray.push(item.name)
+                }
+                return isArid
+            })
+        }
+        
     }
 
     if (properties.get("frozen") === true) {
@@ -66,10 +90,11 @@ export function comparePlanets(arr, properties) {
         }))
     }
 
-    
-    // console.log(checkFilters)
+
+    console.log(checkFilters.length > 0 ? checkFilters : copyArr)
     return checkFilters.length > 0 ? checkFilters : copyArr
 }
+
 
 // export function comparePlanets(arr, property) {
 //     let copyArr = [...arr]

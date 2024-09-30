@@ -4,12 +4,12 @@ const mD = data.results
 
 let formMap = new Map([
     ["sortables", "zToA"],
-    ["temperate", "on"],
+    ["temperate", true],
     ["arid", "3"],
     ["frozen", "4"],
-    ["mountainRanges", "5"],
+    ["mountainRanges", ""],
     ["desert", "6"],
-    ["gasGiant", "on"],
+    ["gasGiant", true],
     ["minMaxPopulation", [0, -1]]
 ])
 
@@ -41,47 +41,75 @@ export function comparePlanets(arr, properties) {
             break   
     }
     
+    let entries = properties.entries()
     let checkFilters = []
+    let namesInArray = []
 
-    if (properties.get("temperate") === "on") {
-        checkFilters.push(copyArr.filter(item => {
-            return item.climate.includes("temperate")
-        }))
+    for (const [key, value] of entries) {
+        if (value === true) {
+            if (checkFilters.length > 0) {
+                
+            }
+            else {
+                // checkFilters = copyArr.filter(item => {
+                //     let hasFeature = item.(key).includes("arid")
+                //     if (isArid) {
+                //         namesInArray.push(item.name)
+                //     }
+                //     return isArid
+                // })
+            }
+        }
     }
 
-    if (properties.get("arid") === "on") {
-        checkFilters.push(copyArr.filter(item => {
-            return item.climate.includes("arid")
-        }))
-    }
+    // if (properties.get("temperate") === true) {
+    //     checkFilters = copyArr.filter(item => {
+    //         let isTemperate = item.climate.includes("temperate")
+    //         if (isTemperate) {
+    //             namesInArray.push(item.name)
+    //         }
+    //         return isTemperate
+    //     })
 
-    if (properties.get("frozen") === "on") {
-        checkFilters.push(copyArr.filter(item => {
-            return item.climate.includes("frozen")
-        }))
-    }
+    // }
 
-    if (properties.get("desert") === "on") {
-        checkFilters.push(copyArr.filter(item => {
-            return item.terrain.includes("desert")
-        }))
-    }
+    // if (properties.get("arid") === true) {
+    //     if (checkFilters.length > 0) {
+    //         copyArr.map(item => {
+    //             let isArid = item.climate.includes("arid")
+    //             if (isArid && !namesInArray.includes(item.name)) {
+    //                 checkFilters.push(item)
+    //                 namesInArray.push(item.name)
+    //             }
+    //         })
+    //     }
+    // else {
+    //         checkFilters = copyArr.filter(item => {
+    //             let isArid = item.climate.includes("arid")
+    //             if (isArid) {
+    //                 namesInArray.push(item.name)
+    //             }
+    //             return isArid
+    //         })
+    //     }
+        
+    // }
 
-    if (properties.get("mountainRanges") === "on") {
-        checkFilters.push(copyArr.filter(item => {
-            return item.terrain.includes("mountain ranges")
-        }))
-    }
 
-    if (properties.get("gasGiant") === "on") {
-        checkFilters.push(copyArr.filter(item => {
-            return item.terrain.includes("gas giant")
-        }))
-    }
 
-    
-    console.log(checkFilters)
+
+    // console.log(checkFilters.length > 0 ? checkFilters : copyArr)
     return checkFilters.length > 0 ? checkFilters : copyArr
 }
 
 console.log(comparePlanets(mD, formMap).length)
+
+
+function entriesLister(map) {
+    let entries = map.entries()
+    for (const [key, value] of entries) {
+        console.log(key, value)
+    }
+}
+
+// entriesLister(formMap)
